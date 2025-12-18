@@ -121,6 +121,10 @@ export default function TwoPaneMapPage({
     const csv = toCSV(rows, ["level", "region_id", "region_name", "selected_party", "selected_party_label"]);
     downloadTextFile(`selection_${level}_${nowStamp()}.csv`, csv);
   };
+  const DISABLED_SIGUNGU = new Set([
+    "50110", // 제주시 (네 JSON id로 교체)
+    "50130", // 서귀포시 (네 JSON id로 교체)
+  ]);
 
   return (
     <main className="container">
@@ -174,10 +178,18 @@ export default function TwoPaneMapPage({
             geoUrl={geoUrl}
             assignment={assignment}
             enableZoom={level === "sigungu"}
-            onHoverRegion={setHover}
-            onClickRegion={(id) =>
-              setAssignment((prev) => ({ ...prev, [id]: nextParty((prev[id] ?? "TOSSUP") as PartyKey) }))
-            }
+            onHoverRegion={(h) => {
+              if (level === "sigungu" && h && DISABLED_SIGUNGU.has(h.id)) {
+                setHover(null); // ✅ 패널/표시 전부 숨김
+                return;
+              }
+              setHover(h);
+            }}
+            
+            onClickRegion={(id) => {
+              if (level === "sigungu" && DISABLED_SIGUNGU.has(id)) return; // ✅ 클릭 무시
+              setAssignment((prev) => ({ ...prev, [id]: nextParty((prev[id] ?? "TOSSUP") as PartyKey) }));
+            }}
           />
         </div>
 
