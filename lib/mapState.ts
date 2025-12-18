@@ -18,7 +18,7 @@ export const PARTY_LABEL: Record<PartyKey, string> = {
 export const PARTY_COLOR: Record<PartyKey, string> = {
   PPP: "#e11d48",
   DPK: "#2563eb",
-  JP: "#D6001C",
+  JP: "#782B90",
   GAE: "#FF7210",
   CHO: "#06275E",
   OTHER: "#6b7280",
