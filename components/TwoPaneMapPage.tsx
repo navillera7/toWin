@@ -131,7 +131,7 @@ export default function TwoPaneMapPage({
           <div>
             <h1 style={{ margin: 0, fontSize: 22 }}>{title}</h1>
             <div className="muted" style={{ marginTop: 6, lineHeight: 1.6 }}>
-              지도를 클릭하여 각 지역의 예상 당선을 선택하세요. 선택한 결과는 URL에 자동 저장되며, "선택 결과 CSV 다운로드" 버튼을 눌러 CSV 파일로도 받을 수 있습니다.
+               
             </div>
           </div>
           <div className="row">
